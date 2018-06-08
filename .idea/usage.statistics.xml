@@ -5,15 +5,15 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="gitignore" value="13" />
-          <entry key="html" value="373" />
+          <entry key="html" value="743" />
           <entry key="scss" value="35" />
-          <entry key="txt" value="5" />
+          <entry key="txt" value="8" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="HTML" value="373" />
-          <entry key="PLAIN_TEXT" value="18" />
+          <entry key="HTML" value="743" />
+          <entry key="PLAIN_TEXT" value="21" />
           <entry key="SCSS" value="35" />
         </counts>
       </usages-collector>
