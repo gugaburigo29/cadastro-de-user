@@ -16,6 +16,9 @@
         </head>
 <body>
 <div class="container">
+    <input id="nome" type="text">
+    <input id="pass" type="text">
+    <button id="send">go</button>
     <div id="notify"></div>
 </div>
 <script>
@@ -90,9 +93,8 @@
     }
 
     function verificaPass(p) {
-        var pass = [], check;
         for (var i in users) {
-            pass = users[i].pass
+            console.log(users[i])
         }
         if (p !== pass) {
             check = {
@@ -125,10 +127,5 @@
         return check;
     }
 </script>
-</body>
-</html></title>
-</head>
-<body>
-
 </body>
 </html>
