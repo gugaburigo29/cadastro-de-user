@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title><!DOCTYPE html>
+        <html lang="pt-br">
+        <head>
+            <meta charset="UTF-8">
+            <title>Btn</title>
+            <link rel="stylesheet" href="style.min.css">
+            <link rel="stylesheet" href="normalize.css">
+            <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
+                  integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
+                  crossorigin="anonymous">
+            <script src="jquery.js"></script>
+        </head>
+<body>
+<div class="container">
+    <div id="notify"></div>
+</div>
+<script>
+    var users =
+        [
+            {
+                10: {
+                    id: 1, name: 'guga', pass: 'xx'
+                }
+            },
+            {
+                20: {
+                    id: 2, name: 'gugax', pass: 'xxs'
+                }
+            }
+        ]
+
+    console.log(users)
+
+    var local = localStorage.getItem("User");
+
+    if (local !== null) {
+        $("#nome").val(local).attr({
+            disabled: true
+        })
+    }
+
+    console.log(local)
+
+    $('#send').click(function () {
+        var nome = $("#nome").val(),
+            pass = $("#pass").val();
+
+        Login(nome, pass)
+
+        return false;
+    });
+
+    function Login(n, p) {
+        var name = verificaNome(n);
+        var pass = verificaPass(p);
+
+        if (name.bool === true && pass.bool === true) {
+            mostraMsg(name.msg, 'true')
+            localStorage.setItem("User", name.name);
+        }
+        if (pass.bool === false) {
+            mostraMsg(pass.msg, 'false')
+        }
+        if (name.bool === false) {
+            mostraMsg(name.msg, 'false')
+        }
+    }
+
+    function mostraMsg(msg, classe) {
+        var div = $('<div class="res"></div>');
+        div.addClass(classe)
+        if (classe === 'true') {
+            div.text(`Logado`)
+        }
+
+        if (classe === 'false') {
+            div.text(msg)
+        }
+
+        div.prependTo('#notify')
+        div.animate({
+            'margin-top': '200px'
+        }, 3000, function () {
+            $(this).remove()
+        })
+    }
+
+    function verificaPass(p) {
+        var pass = [], check;
+        for (var i in users) {
+            pass = users[i].pass
+        }
+        if (p !== pass) {
+            check = {
+                bool: false,
+                msg: 'Senha incorreta!'
+            }
+        } else {
+            check = {
+                bool: true,
+                pass: p
+            }
+        }
+        return check
+    }
+
+    function verificaNome(n) {
+        var nome = users.name, check;
+        if (n !== nome) {
+            check = {
+                bool: false,
+                msg: 'User não encontrado'
+            }
+        } else {
+            console.log("Ok!")
+            check = {
+                bool: true,
+                name: n
+            }
+        }
+        return check;
+    }
+</script>
+</body>
+</html></title>
+</head>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Btn</title>
+    <link rel="stylesheet" href="style.min.css">
+    <link rel="stylesheet" href="normalize.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
+          integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+    <script src="jquery.js"></script>
+</head>
+<body>
+<div class="container">
+    <div class="box">
+
+    </div>
+</div>
+<div id="menu">
+    <div class="btn btn-more">
+        <i class="fas fa-plus"></i>
+    </div>
+    <div id="caixa-menu">
+
+    </div>
+</div>
+<script>
+    var graus = 0;
+    $(".btn-more").click(function () {
+        var deg = graus += 45
+        $(this).css({
+            transform: 'rotate(' + deg + 'deg)'
+        });
+        var rotate = $(this).css('transorm', 'rotate');
+
+        console.log(rotate)
+    })
+</script>
+</body>
+</html>
