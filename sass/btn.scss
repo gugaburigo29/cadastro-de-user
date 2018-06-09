@@ -1,7 +1,11 @@
+body{
+  height: 635px;
+}
+
 .container {
   margin: 0 auto;
   width: 1300px;
-  height: 200px;
+  height: 100%;
 }
 
 .box {
@@ -40,33 +44,4 @@
 
 .rotate {
   transform: rotate(90deg);
-}
-
-//js.html
-
-#notify {
-  width: 200px;
-  height: 100%;
-  position: absolute;
-  top: 0;
-}
-
-.res {
-  width: 200px;
-  height: 100px;
-  float: left;
-  background: #f1f1f1;
-  box-shadow: 0 2px 2px rgba(0, 0, 0, .1);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.true {
-  background: #27ae60;
-  color: #f1f1f1;
-}
-
-.false {
-  background: #c0392b;
 }

@@ -1,0 +1,78 @@
+#form-login {
+  input {
+    padding: 1em 2em;
+    border-radius: 5px;
+    border: {
+      width: 1px;
+      color: #d4d4d4;
+      style: solid;
+    }
+    margin: 10px 0;
+    &::placeholder{
+      color: #8a8a8a;
+    }
+  }
+  button{
+    background: #2980b9;
+    color: #f1f1f1;
+    border: none;
+    padding: 1em;
+    margin: 10px 0;
+    border-radius: 5px;
+    font-weight: 100;
+  }
+}
+
+.bloco {
+  width: 100%;
+}
+
+.display-flex {
+  display: flex;
+}
+
+.em-coluna {
+  flex-direction: column;
+}
+
+.center {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+#notify {
+  width: 200px;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.res {
+  width: 200px;
+  height: 100px;
+  float: left;
+  background: #f1f1f1;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, .1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+}
+
+.true {
+  background: rgba(65, 185, 99, 0.4);
+  border: {
+    width: 1px;
+    style: solid;
+    color: #37954b;
+  }
+;
+  color: #1a1a1a;
+}
+
+.false {
+  background: #c0392b;
+}

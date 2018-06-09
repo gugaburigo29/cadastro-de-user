@@ -15,25 +15,22 @@
             <script src="jquery.js"></script>
         </head>
 <body>
-<div class="container">
-    <input id="nome" type="text">
-    <input id="pass" type="text">
-    <button id="send">go</button>
-    <div id="notify"></div>
+<div id="notify"></div>
+
+<div class="container center">
+    <div class="bloco center ">
+        <form id="form-login" class="display-flex em-coluna">
+            <input id="nome" placeholder="User. Ex.: user123" type="text">
+            <input id="pass" placeholder="Senha. Ex.: 12345abcd"type="password">
+            <button id="send">Login</button>
+        </form>
+    </div>
 </div>
 <script>
     var users =
         [
-            {
-                'guga': {
-                    pass: 'xx'
-                }
-            },
-            {
-                'g': {
-                    pass: 'xx'
-                }
-            }
+            {name: 'guga', pass: 'xx'},
+            {name: 'luis', pass: 'xxx'}
         ]
 
     var local = localStorage.getItem("User");
@@ -48,23 +45,25 @@
         var nome = $("#nome").val(),
             pass = $("#pass").val();
 
-        //Login(nome, pass)
+        Login(nome, pass)
 
         return false;
     });
 
     function Login(n, p) {
         var name = verificaLogin(n, p);
+        var msg = mostraMsg(name.msg, name.res)
     }
 
     function mostraMsg(msg, classe) {
         var div = $('<div class="res"></div>');
-        div.addClass(classe)
-        if (classe === 'true') {
+        var css = classe.toString();
+        div.addClass(css)
+        if (css === 'true') {
             div.text(`Logado`)
         }
 
-        if (classe === 'false') {
+        if (css === 'false') {
             div.text(msg)
         }
 
@@ -76,17 +75,34 @@
         })
     }
 
-    verificaLogin('guga', 'xx')
-
     function verificaLogin(nome, pass) {
-        for (var i in users){
-            console.log(users[i])
-            if (nome === users[i]){
-                console.log(users)
-            } else {
-                console.log('not')
+        var check;
+        for (const user of users) {
+            if (nome === user.name) {
+                if (pass !== user.pass) {
+                    check = {
+                        res: false,
+                        msg: 'Senha incorreta'
+                    };
+                    break;
+                } else {
+                    check = {
+                        res: true,
+                        msg: 'Logado com sucesso.',
+                        nome: user.name
+                    };
+                    break;
+                }
+            }
+            else {
+                check = {
+                    res: false,
+                    msg: 'User nao encontrado'
+                }
             }
         }
+
+        return check;
     }
 </script>
 </body>

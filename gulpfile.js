@@ -5,7 +5,7 @@ var gulp = require('gulp'),
 gulp.task('default', ['sass']);
 
 gulp.task('sass', function () {
-    return gulp.src('sass/btn.scss')
+    return gulp.src('sass/style.scss')
         .pipe(concat('style.min.css'))
         .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
         .pipe(gulp.dest('public'));
