@@ -9,6 +9,7 @@
           integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
           crossorigin="anonymous">
     <script src="jquery.js"></script>
+    <script src="crypto-js/crypto-js.js"></script>
 </head>
 <body>
 <div id="notify"></div>
@@ -25,8 +26,8 @@
 <script>
     var users =
         [
-            {name: 'guga', pass: 'xx'},
-            {name: 'luis', pass: 'xxx'}
+            {name: 'guga', pass: 'Xd6JaIf2dUybFb/jpEGuSAbfL96UABMR4IvxEGIuC74='},
+            {name: 'luis', pass: 'zS6wg3ybTJYsItL/i1RBt7RYBYh/BR05vxM7WDuvaGA='}
         ]
 
     var local = localStorage.getItem("User");
@@ -40,6 +41,9 @@
     $('#send').click(function () {
         var nome = $("#nome").val(),
             pass = $("#pass").val();
+
+        pass = CryptoJS.SHA256(pass);
+        pass = pass.toString(CryptoJS.enc.Base64);
 
         Login(nome, pass)
 
