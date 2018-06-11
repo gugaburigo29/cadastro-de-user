@@ -14,7 +14,7 @@
 <div id="notify"></div>
 
 <div class="container center">
-    <div class="bloco center ">
+    <div class="bloco center" id="bloco-principal">
         <form id="form-login" class="display-flex em-coluna">
             <input id="nome" placeholder="User. Ex.: user123" type="text">
             <input id="pass" placeholder="Senha. Ex.: 12345abcd" type="password">
@@ -41,14 +41,28 @@
         var nome = $("#nome").val(),
             pass = $("#pass").val();
 
-        Login(nome, pass)
+        var login = Login(nome, pass)
+
+        if (login.res){
+            abreDash();
+        }
 
         return false;
     });
 
+    /**
+     * @return {{}}
+     */
     function Login(n, p) {
         var name = verificaLogin(n, p);
-        var msg = mostraMsg(name.msg, name.res)
+        var msg = mostraMsg(name.msg, name.res);
+        var ret = {};
+        var res = name.res === true;
+        var nome = res === true ? name.nome : false;
+        return ret = {
+            res: res,
+            nome: nome
+        };
     }
 
     function mostraMsg(msg, classe) {
@@ -105,6 +119,16 @@
 
         return check;
     }
+    
+    function abreDash() {
+        $("#form-login").animate({
+            "margin-left": '-150vw'
+        }, function () {
+            $(this).remove()
+        });
+
+    }
+
 </script>
 </body>
 </html>
