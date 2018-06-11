@@ -4,5 +4,16 @@
   font-family: 'Roboto', sans-serif, Arial;
 }
 
+body{
+  height: 100vh;
+  background: #f7f7f7;
+}
+
+.container {
+  margin: 0 auto;
+  width: 1300px;
+  height: 100%;
+}
+
 @import "login";
 @import "btn";
