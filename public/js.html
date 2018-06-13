@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br" xmlns:v-on="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Btn</title>
@@ -10,55 +10,72 @@
           crossorigin="anonymous">
     <script src="jquery.js"></script>
     <script src="crypto-js/crypto-js.js"></script>
+    <script src="vue.js"></script>
 </head>
 <body>
 <div id="notify"></div>
 
-<div class="container center">
+<div class="container center" id="app">
     <div class="bloco center" id="bloco-principal">
         <form id="form-login" class="display-flex em-coluna">
-            <input id="nome" placeholder="User. Ex.: user123" type="text">
-            <input id="pass" placeholder="Senha. Ex.: 12345abcd" type="password">
-            <button id="send">Login</button>
+            <input id="nome" :class="[{ 'error': login.res === false}, {'check':login.res === true}]" v-model="nome" placeholder="User. Ex.: user123" type="text">
+            <input id="pass" v-model="pass" placeholder="Senha. Ex.: 12345abcd" type="password">
+            <button id="send" v-on:click="enviarForm()" type="button">Login</button>
         </form>
     </div>
 </div>
 <script>
-    var users =
-        [
-            {name: 'guga', pass: 'Xd6JaIf2dUybFb/jpEGuSAbfL96UABMR4IvxEGIuC74='},
-            {name: 'luis', pass: 'zS6wg3ybTJYsItL/i1RBt7RYBYh/BR05vxM7WDuvaGA='}
-        ]
+    var app = new Vue({
+        el: '#app',
+        data: {
+            nome: undefined,
+            pass: undefined,
+            login: {
+                res: undefined,
+                msg: undefined
+            },
+            users: [
+                {nome: 'guga', pass: 'Xd6JaIf2dUybFb/jpEGuSAbfL96UABMR4IvxEGIuC74='},
+                {nome: 'luis', pass: 'zS6wg3ybTJYsItL/i1RBt7RYBYh/BR05vxM7WDuvaGA='}
+            ]
+        },
+        methods: {
+            Login: function (nome, pass) {
+                var login = this.login;
+                for (var user of this.users) {
+                    if (nome === user.nome) {
+                        if (pass === user.pass) {
+                            login.res = true;
+                            login.msg = "Logado!";
+                            break;
+                        } else {
+                            login.res = false;
+                            login.msg = "Senha incorreta";
+                            break;
+                        }
+                    } else {
+                        login.res = false;
+                        login.msg = "Usuario nao cadastrado";
+                    }
+                }
+                mostraMsg(login.msg, login.res)
+            },
+            enviarForm: function (e) {
+                var nome = this.nome;
+                var pass = this.pass;
 
-    var local = localStorage.getItem("User");
+                pass = CryptoJS.SHA256(pass);
+                pass = pass.toString(CryptoJS.enc.Base64);
 
-    if (local !== null) {
-        $("#nome").val(local).attr({
-            disabled: true
-        })
-    }
-
-    $('#send').click(function (e) {
-        e.preventDefault();
-        var nome = $("#nome").val(),
-            pass = $("#pass").val();
-
-        pass = CryptoJS.SHA256(pass);
-        pass = pass.toString(CryptoJS.enc.Base64);
-
-        var login =  Login(nome, pass);
-
-        if (login.res){
-            abreDash();
+                this.Login(nome, pass);
+            },
         }
-
-        return false;
     });
 
     /**
      * @return {{}}
      */
-    function Login(n, p) {
+    function a(n, p) {
         var name = verificaLogin(n, p);
         var msg = mostraMsg(name.msg, name.res);
         var ret = {};

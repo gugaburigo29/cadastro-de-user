@@ -72,6 +72,16 @@
   }
 }
 
+.error{
+  border: 1px solid #e74c3c !important;
+  box-shadow: 0 0 2px rgba(217, 42, 41, 0.3) !important;
+}
+
+.check{
+  border: 1px solid #49e766 !important;
+  box-shadow: 0 0 2px rgba(73, 231, 102, 0.29) !important;
+}
+
 .true {
   border-left: {
     width: 5px;

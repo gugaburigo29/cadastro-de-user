@@ -5,30 +5,34 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="gitignore" value="13" />
-          <entry key="html" value="743" />
-          <entry key="scss" value="35" />
+          <entry key="html" value="2336" />
+          <entry key="scss" value="97" />
           <entry key="txt" value="8" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="HTML" value="743" />
+          <entry key="HTML" value="2336" />
           <entry key="PLAIN_TEXT" value="21" />
-          <entry key="SCSS" value="35" />
+          <entry key="SCSS" value="97" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="gitignore" value="1" />
-          <entry key="html" value="3" />
+          <entry key="gitignore" value="2" />
+          <entry key="html" value="7" />
+          <entry key="js" value="2" />
           <entry key="json" value="2" />
+          <entry key="scss" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="HTML" value="3" />
+          <entry key="HTML" value="7" />
           <entry key="JSON" value="2" />
-          <entry key="PLAIN_TEXT" value="1" />
+          <entry key="JavaScript" value="2" />
+          <entry key="PLAIN_TEXT" value="2" />
+          <entry key="SCSS" value="1" />
         </counts>
       </usages-collector>
     </session>
