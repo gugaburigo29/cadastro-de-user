@@ -12,6 +12,7 @@
     <script src="crypto-js/crypto-js.js"></script>
     <script src="vue.js"></script>
     <script src="vue-resource.js"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
 </head>
 <body>
 <div id="notify"></div>
@@ -46,8 +47,6 @@
             getUsers: function(){
                 this.$http.get("http://localhost:3000/users").then(function(response){
                     this.users = response.data;
-
-                    console.log(this.users)
                 }, function(error){
                     console.log(error.statusText);
                 });

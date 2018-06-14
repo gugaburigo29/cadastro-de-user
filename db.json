@@ -1,6 +1,24 @@
 {
   "users": [
-    {"nome": "guga", "pass": "Xd6JaIf2dUybFb/jpEGuSAbfL96UABMR4IvxEGIuC74="},
-    {"nome": "luis", "pass": "zS6wg3ybTJYsItL/i1RBt7RYBYh/BR05vxM7WDuvaGA="}
+    {
+      "id": 1,
+      "nome": "guga",
+      "pass": "Xd6JaIf2dUybFb/jpEGuSAbfL96UABMR4IvxEGIuC74="
+    },
+    {
+      "id": 2,
+      "nome": "luis",
+      "pass": "zS6wg3ybTJYsItL/i1RBt7RYBYh/BR05vxM7WDuvaGA="
+    },
+    {
+      "id": 3,
+      "nome": "cebo",
+      "pass": "zS6wg3ybTJYsItL/i1RBt7RYBYh/BR05vxM7WDuvaGA="
+    },
+    {
+      "name": "teste",
+      "pass": "teste",
+      "id": 4
+    }
   ]
 }
