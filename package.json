@@ -8,5 +8,8 @@
     "gulp-concat": "^2.6.1",
     "gulp-sass": "^3.1.0",
     "vue": "^2.5.16"
+  },
+  "scripts": {
+    "serve": "json-server --watch db.json --static ./"
   }
 }
