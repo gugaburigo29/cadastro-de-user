@@ -9,159 +9,20 @@
           integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
           crossorigin="anonymous">
     <script src="jquery.js"></script>
+    <script src="script-min.js"></script>
     <script src="crypto-js/crypto-js.js"></script>
     <script src="vue.js"></script>
     <script src="vue-resource.js"></script>
-    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+    <script src="vue-router.js"></script>
 </head>
 <body>
 <div id="notify"></div>
 
 <div class="container center" id="app">
-    <div class="bloco center" id="bloco-principal">
-        <form id="form-login" class="display-flex em-coluna">
-            <input id="nome" :class="[{ 'error': login.res === false}, {'check':login.res === true}]" v-model="nome" placeholder="User. Ex.: user123" type="text">
-            <input id="pass" v-model="pass" placeholder="Senha. Ex.: 12345abcd" type="password">
-            <button id="send" v-on:click="enviarForm()" type="button">Login</button>
-        </form>
-    </div>
+    <router-view></router-view>
 </div>
 <script>
-    var app = new Vue({
-        el: '#app',
-        data: {
-            nome: undefined,
-            pass: undefined,
-            login: {
-                res: undefined,
-                msg: undefined
-            },
-            users: [
-
-            ]
-        },
-        mounted: function() {
-                this.getUsers();
-        },
-        methods: {
-            getUsers: function(){
-                this.$http.get("http://localhost:3000/users").then(function(response){
-                    this.users = response.data;
-                }, function(error){
-                    console.log(error.statusText);
-                });
-            },
-            Login: function (nome, pass) {
-                var login = this.login;
-                for (var user of this.users) {
-                    if (nome === user.nome) {
-                        if (pass === user.pass) {
-                            login.res = true;
-                            login.msg = "Logado!";
-                            break;
-                        } else {
-                            login.res = false;
-                            login.msg = "Senha incorreta";
-                            break;
-                        }
-                    } else {
-                        login.res = false;
-                        login.msg = "Usuario nao cadastrado";
-                    }
-                }
-                mostraMsg(login.msg, login.res)
-            },
-            enviarForm: function (e) {
-                var nome = this.nome;
-                var pass = this.pass;
-
-                pass = CryptoJS.SHA256(pass);
-                pass = pass.toString(CryptoJS.enc.Base64);
-
-                this.Login(nome, pass);
-            },
-        }
-    });
-
-    /**
-     * @return {{}}
-     */
-    function a(n, p) {
-        var name = verificaLogin(n, p);
-        var msg = mostraMsg(name.msg, name.res);
-        var ret = {};
-        var res = name.res === true;
-        var nome = res === true ? name.nome : false;
-        return ret = {
-            res: res,
-            nome: nome
-        };
-    }
-
-    function mostraMsg(msg, classe) {
-        var div = $('<div class="res"></div>');
-        var icon = $('<span class="icon"></span>')
-        var css = classe.toString();
-        div.addClass(css)
-        if (css === 'true') {
-            div.text(`Logado`)
-            icon.html('<i class="fas fa-check-circle"></i>')
-            icon.appendTo(div)
-        }
-
-        if (css === 'false') {
-            div.text(msg)
-            icon.html('<i class="fas fa-exclamation-triangle"></i>')
-            icon.appendTo(div)
-        }
-
-        div.prependTo('#notify')
-        div.animate({
-            'margin-top': '200px'
-        }, 3000, function () {
-            $(this).remove()
-        })
-    }
-
-    function verificaLogin(nome, pass) {
-        var check;
-        for (const user of users) {
-            if (nome === user.name) {
-                if (pass !== user.pass) {
-                    check = {
-                        res: false,
-                        msg: 'Senha incorreta'
-                    };
-                    break;
-                } else {
-                    check = {
-                        res: true,
-                        msg: 'Logado com sucesso.',
-                        nome: user.name
-                    };
-                    break;
-                }
-            }
-            else {
-                check = {
-                    res: false,
-                    msg: 'User nao encontrado'
-                }
-            }
-        }
-
-        return check;
-    }
-
-    function abreDash() {
-        $("#form-login").animate({
-            "margin-left": '-150vw'
-        }, function () {
-            $(this).remove()
-        });
-
-    }
-
+   iniciarVue();
 </script>
 </body>
 </html>
