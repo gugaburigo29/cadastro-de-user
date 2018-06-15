@@ -1,11 +1,15 @@
 function iniciarVue() {
-    var login =  Vue.component('login', {
-        template: "<h1>asd</h1>"
+    var login = Vue.component('login', {
+        template: "<h1>Login</h1>"
+    });
+    var cadastro = Vue.component('cadastro', {
+        template: "<h1>Cadastro</h1>"
     });
 
     var router = new VueRouter({
         routes: [
-            {path: '/', component: login}
+            {path: '/', component: login},
+            {path: '/c', component: cadastro}
         ]
     });
 
@@ -19,18 +23,16 @@ function iniciarVue() {
                 res: undefined,
                 msg: undefined
             },
-            users: [
-
-            ]
+            users: []
         },
-        mounted: function() {
+        mounted: function () {
             this.getUsers();
         },
         methods: {
-            getUsers: function(){
-                this.$http.get("http://localhost:3000/users").then(function(response){
+            getUsers: function () {
+                this.$http.get("http://localhost:3000/users").then(function (response) {
                     this.users = response.data;
-                }, function(error){
+                }, function (error) {
                     console.log(error.statusText);
                 });
             },
