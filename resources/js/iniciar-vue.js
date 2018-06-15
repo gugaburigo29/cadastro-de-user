@@ -1,34 +1,20 @@
 function iniciarVue() {
-    const templateLogin = '';
 
     var login = Vue.component('login', {
-        template: "<h1>Login</h1>"
-    });
-    var cadastro = Vue.component('cadastro', {
-        template: "<h1>Cadastro</h1>"
-    });
-
-    var router = new VueRouter({
-        routes: [
-            {path: '/', component: login},
-            {path: '/c', component: cadastro}
-        ]
-    });
-
-
-    var app = new Vue({
-        router,
-        data: {
-            nome: undefined,
-            pass: undefined,
-            login: {
-                res: undefined,
-                msg: undefined
-            },
-            users: []
+        template: `<div class="bloco center" id="bloco-principal"><form id="form-login" class="display-flex em-coluna"><input id="nome" :class="[{ 'error': login.res === false}, {'check':login.res === true}]" v-model="nome" placeholder="User. Ex.: user123" type="text"><input id="pass" v-model="pass" placeholder="Senha. Ex.: 12345abcd" type="password"><button id="send" v-on:click="enviarForm()" type="button">Login</button></form></div>`,
+        data: function () {
+            return {
+                nome: undefined,
+                pass: undefined,
+                login: {
+                    res: undefined,
+                    msg: undefined
+                },
+                users: []
+            };
         },
-        mounted: function () {
-            this.getUsers();
+        mounted: function(){
+          this.getUsers();
         },
         methods: {
             getUsers: function () {
@@ -64,9 +50,25 @@ function iniciarVue() {
 
                 pass = CryptoJS.SHA256(pass);
                 pass = pass.toString(CryptoJS.enc.Base64);
+                console.log(pass)
 
                 this.Login(nome, pass);
             },
         }
+    });
+    var cadastro = Vue.component('cadastro', {
+        template: "<h1>Cadastro</h1>"
+    });
+
+    var router = new VueRouter({
+        routes: [
+            {path: '/', component: login},
+            {path: '/c', component: cadastro}
+        ]
+    });
+
+
+    var app = new Vue({
+        router,
     }).$mount('#app');
 }
