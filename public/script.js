@@ -13,6 +13,9 @@ function iniciarVue() {
                 users: []
             };
         },
+        beforeCreate(){
+            barraLoader();
+        },
         mounted: function(){
           this.getUsers();
         },
@@ -57,13 +60,16 @@ function iniciarVue() {
         }
     });
     var cadastro = Vue.component('cadastro', {
-        template: "<h1>Cadastro</h1>"
+        template: ' <div class="bloco center" id="bloco-principal"><form id="form-login" class="display-flex em-coluna"><input type="text" placeholder="Nome usuario"><input type="password" placeholder="Password"><button type="button">Enviar</button></form></div>',
+        beforeCreate(){
+            barraLoader();
+        }
     });
 
     var router = new VueRouter({
         routes: [
             {path: '/', component: login},
-            {path: '/c', component: cadastro}
+            {path: '/cadastro', component: cadastro}
         ]
     });
 
@@ -71,6 +77,14 @@ function iniciarVue() {
     var app = new Vue({
         router,
     }).$mount('#app');
+}
+function barraLoader() {
+    var barra = document.getElementById("loader-top");
+        barra.style.display = 'block';
+
+        setTimeout(function () {
+            barra.style.display = 'none';
+        }, 1000)
 }
 function mostraMsg(msg, classe) {
     var div = $('<div class="res"></div>');
