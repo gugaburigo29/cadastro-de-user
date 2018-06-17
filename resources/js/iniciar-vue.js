@@ -13,11 +13,11 @@ function iniciarVue() {
                 users: []
             };
         },
-        beforeCreate(){
+        beforeCreate() {
             barraLoader();
         },
-        mounted: function(){
-          this.getUsers();
+        mounted: function () {
+            this.getUsers();
         },
         methods: {
             getUsers: function () {
@@ -61,7 +61,7 @@ function iniciarVue() {
     });
     var cadastro = Vue.component('cadastro', {
         template: ' <div class="bloco center" id="bloco-principal"><form id="form-login" class="display-flex em-coluna"><input type="text" placeholder="Nome usuario"><input type="password" placeholder="Password"><button type="button">Enviar</button></form></div>',
-        beforeCreate(){
+        beforeCreate() {
             barraLoader();
         }
     });
