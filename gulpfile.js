@@ -9,13 +9,13 @@ gulp.task('sass', function () {
     return gulp.src('resources/sass/style.scss')
         .pipe(concat('style.min.css'))
         .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
-        .pipe(gulp.dest('public'));
+        .pipe(gulp.dest('public/assets'));
 });
 gulp.task('js', function () {
-    return gulp.src('resources/js/*.js')
+    return gulp.src('resources/js/**/*.js')
         .pipe(concat('script.js'))
         .pipe(minify())
-        .pipe(gulp.dest('public'));
+        .pipe(gulp.dest('public/assets'));
 });
 gulp.task('watch', function () {
     gulp.watch('sass', ['sass']);

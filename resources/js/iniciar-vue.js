@@ -1,5 +1,4 @@
 function iniciarVue() {
-
     var login = Vue.component('login', {
         template: `<div class="bloco center" id="bloco-principal"><form id="form-login" class="display-flex em-coluna"><input id="nome" :class="[{ 'error': login.res === false}, {'check':login.res === true}]" v-model="nome" placeholder="User. Ex.: user123" type="text"><input id="pass" v-model="pass" placeholder="Senha. Ex.: 12345abcd" type="password"><button id="send" v-on:click="enviarForm()" type="button">Login</button></form></div>`,
         data: function () {
@@ -60,9 +59,70 @@ function iniciarVue() {
         }
     });
     var cadastro = Vue.component('cadastro', {
-        template: ' <div class="bloco center" id="bloco-principal"><form id="form-login" class="display-flex em-coluna"><input type="text" placeholder="Nome usuario"><input type="password" placeholder="Password"><button type="button">Enviar</button></form></div>',
+        template: `
+            <div class="bloco center" id="bloco-principal">
+                <form id="form-login" class="display-flex em-coluna">
+                    <input type="text" v-on:keyup="validarNome()" v-model="name" placeholder="Nome usuario">
+                    <input type="password" v-model="pass" placeholder="Password">
+                    <input type="password" v-model="confirmPass" placeholder="Confirme Password">
+                    <button type="button" v-on:click="enviarForm">Enviar</button>
+                </form>
+            </div>
+`,
         beforeCreate() {
             barraLoader();
+        },
+        data: function () {
+            return {
+                name: undefined,
+                nameValid: undefined,
+                pass: undefined,
+                confirmPass: undefined,
+                user: {
+                    name: undefined,
+                    pass: undefined
+                },
+                usersServer: []
+            }
+        },
+        mounted: function () {
+            this.getUsers()
+        },
+        methods: {
+            getUsers: function () {
+                this.$http.get(`http://localhost:3000/users/`).then(function (response) {
+                    this.usersServer.push(response.data)
+                    console.log(this.usersServer)
+                }, function (error) {
+                    console.log(error.statusText);
+                });
+            },
+            validarNome: function () {
+                for (var user of this.usersServer[0]) {
+                    if (this.name === user.nome) {
+                        this.nameValid = false
+                        console.log(this.nameValid)
+                        mostraMsg('Usuario já cadastrado', this.nameValid)
+                        break
+                    } else {
+                        this.nameValid = true;
+                        console.log(this.nameValid)
+                    }
+                }
+            },
+            enviarForm: function () {
+                var payload = {
+                    nome: this.name,
+                    pass: this.pass
+                };
+                JSON.stringify(payload)
+                console.log(payload)
+                this.$http.post(`http://localhost:3000/users/`, payload, {emulateJSON: true}).then(function (response) {
+                    console.log(response);
+                }, function (error) {
+                    console.log(error.statusText);
+                });
+            },
         }
     });
 
